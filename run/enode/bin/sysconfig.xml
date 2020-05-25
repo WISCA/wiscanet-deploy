@@ -1,5 +1,5 @@
 <? xml version="1.0" ?>
 <SysConfig>
-    <ServerIPAddr> 10.88.0.1 </ServerIPAddr>
+    <ServerIPAddr> 192.168.122.100 </ServerIPAddr>
     <ServerPort> 9000 </ServerPort>
 </SysConfig>
