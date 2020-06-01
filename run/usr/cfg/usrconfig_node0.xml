@@ -2,10 +2,10 @@
 <UsrConfig>
     <LogicId> 0 </LogicId>
     <OpMode> TX </OpMode>
-    <MacMode> UMAC </MacMode>
+    <MacMode> TDMA </MacMode>
     <Tslot> 0 </Tslot>
-    <matDir> UMAC_sin </matDir>
-    <BbMatlab> tx_sine </BbMatlab>
+    <matDir> TDMA_sin </matDir>
+    <BbMatlab> tx_sin </BbMatlab>
     <LogMatlab> NULL </LogMatlab>
     <nsamps> 200000  </nsamps>
     <rate> 10e6 </rate>

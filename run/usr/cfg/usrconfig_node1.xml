@@ -2,11 +2,11 @@
 <UsrConfig>
     <LogicId> 1 </LogicId>
     <OpMode> RX </OpMode>
-    <MacMode> UMAC </MacMode>
+    <MacMode> TDMA </MacMode>
     <Tslot> 1 </Tslot>
-    <matDir> UMAC_sin </matDir>
-    <BbMatlab> rx_sine </BbMatlab>
-    <LogMatlab> rx_log </LogMatlab>
+    <matDir> TDMA_sin </matDir>
+    <BbMatlab> rx_dump </BbMatlab>
+    <LogMatlab> rx_sin_log </LogMatlab>
     <nsamps> 200000  </nsamps>
     <rate> 10e6 </rate>
     <subdev> A:B </subdev>
