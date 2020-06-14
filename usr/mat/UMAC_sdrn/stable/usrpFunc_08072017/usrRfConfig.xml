@@ -1,0 +1,7 @@
+    <nsamps> 200000  </nsamps>
+    <rate>   10e6   </rate>
+    <subdev> A:B   </subdev>
+    <freq>   0.95E9   </freq>
+    <txgain> 50    </txgain>
+    <rxgain> 50    </rxgain>
+    <bw>     100E6 </bw>
