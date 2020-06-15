@@ -1,17 +1,17 @@
 <? xml version="1.0" ?>
 <UsrConfig>
-    <LogicId> 1 </LogicId>
-    <OpMode> RX </OpMode>
-    <MacMode> TDMA </MacMode>
-    <Tslot> 1 </Tslot>
-    <matDir> TDMA_sin </matDir>
-    <BbMatlab> rx_dump </BbMatlab>
-    <LogMatlab> rx_sin_log </LogMatlab>
-    <nsamps> 200000  </nsamps>
-    <rate> 10e6 </rate>
+    <LogicId> 2 </LogicId>
+    <OpMode> TX/RX </OpMode>
+    <MacMode> UMAC </MacMode>
+    <Tslot> 2 </Tslot>
+    <matDir> UMAC_sdrn/usrpFunc </matDir>
+    <BbMatlab> usrpQPSKNode </BbMatlab>
+    <LogMatlab> NULL </LogMatlab>
+    <nsamps> 50000  </nsamps>
+    <rate> 20e6 </rate>
     <subdev> A:B </subdev>
-    <freq> 0.9E9 </freq>
-    <txgain> 40 </txgain>
-    <rxgain> 40 </rxgain>
+    <freq> 0.907E9 </freq>
+    <txgain> 30 </txgain>
+    <rxgain> 20 </rxgain>
     <bw> 100E6 </bw>
 </UsrConfig>
