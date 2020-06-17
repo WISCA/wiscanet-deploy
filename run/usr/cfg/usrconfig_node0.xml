@@ -14,5 +14,5 @@
     <txgain> 40 </txgain>
     <rxgain> 50 </rxgain>
     <bw> 100E6 </bw>
+    <devaddr> type=b200 </devaddr>
 </UsrConfig>
-
