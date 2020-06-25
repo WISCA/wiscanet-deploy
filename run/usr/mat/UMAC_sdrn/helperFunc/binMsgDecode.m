@@ -1,4 +1,4 @@
-%read in binary signal 
+%read in binary signal
 %return numerical values
 function [varargout] = binMsgDecode(binSignal)
 
@@ -9,7 +9,7 @@ function [varargout] = binMsgDecode(binSignal)
     binremBits = binSignal(packetSize-3:end);
     remBits = fix(binremBits*pow2(3:-1:0).');
     nArgs = nargout;
-    
+
     buffSize = (packetSize - (nArgs*2*nBits) - remBits ) / (nArgs + 1);
     buffSize = floor(buffSize); % Added for debugging;
 
@@ -17,7 +17,7 @@ function [varargout] = binMsgDecode(binSignal)
 
             binArg = fix(binSignal((n)*buffSize+1:(n)*(buffSize)+2*nBits)); %%%%%%%%%%%%
             varargout{n} = binArg*pow2(nBits-1:-1:-nBits).';
-            
+
         end
-        
+
 end

@@ -1,13 +1,8 @@
-function rxFiltSyms = commsRXFilt(rxSyms, hFreqEst, hFreqComp, hRXFilt)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
-    %disp(length(rxSyms));
-    % Coarse frequency offset estimation 
-    freqOffsetEst = step(hFreqEst, rxSyms);
-         
+function rxFiltSyms = commsRXFilt(rxSyms, hFreqComp, hRXFilt)
+
     % Coarse frequency compensation
-    coarseCompSyms = step(hFreqComp, rxSyms, -freqOffsetEst);
-    
+    coarseCompSyms = step(hFreqComp, rxSyms);
+
     % Pass signal through RX Filter
     rxFiltSyms = step(hRXFilt, coarseCompSyms);
 
