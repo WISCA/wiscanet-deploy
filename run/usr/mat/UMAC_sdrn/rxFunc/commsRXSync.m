@@ -37,8 +37,11 @@ function [msgSyms, trnSyms, nzeSyms] = timePhaseSynchronization(...
         % Estimated phase offset
         phaseofst = angle(xcorrsyms(maxlagidx));
 
-        % Apply estimated phase offset and time correction to input symbols
-        msgSyms = exp(-1j*phaseofst)*msgSyms;
+%         % Apply estimated phase offset and time correction to input symbols
+% UNCOMMENTING THIS WILL BREAK EQ.  THE EQ HANDLES THE PHASE CORRECTION
+%         msgSyms = exp(-1j*phaseofst)*msgSyms;
+%         trnSyms = exp(-1j*phaseofst)*trnSyms;
+%         nzeSyms = exp(-1j*phaseofst)*nzeSyms;
 
     else
         error('Unable to acquire signal. No waveform detected or PFA value set too small.');
