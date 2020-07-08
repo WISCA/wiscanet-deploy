@@ -15,7 +15,7 @@ tx_gain = 80;               %tx_gain
 bw      = 20e6;             %bw
 setup_time = 0.1;           %setup_time
 num_samps = 50000;
-sample_rate = 20e6;
+sample_rate = 10e6;
 
 usrpRadio = local_usrp;
 
@@ -23,19 +23,20 @@ usrpRadio = usrpRadio.set_usrp(type, ant, subdev, ref, wirefmt, num_samps,...
     sample_rate, freq, rx_gain, tx_gain, bw, setup_time);
 
 fc = 0.1e6;
-t=0:1/sample_rate:(1/sample_rate*(num_samps*0.25 - 1));
-sine = exp(1i*2*pi*fc*t);
-tx_buff = zeros(2*num_samps, 1);
-tx_buff(1:2:2*(num_samps*0.25)) = real(sine);
-tx_buff(2:2:2*(num_samps*0.25)) = imag(sine);
+fc2 = 0.75e6;
+t=0:1/sample_rate:(1/sample_rate*(num_samps - 1));
+sine = exp(1i*2*pi*fc*t).';
+sine2 = exp(1i*2*pi*fc2*t).';
+numChans = 2;
+sineChan = [sine sine2];
 
 cycle_number=5;
 start_time = sys_start_time;
 
 %Send out a carrier every 3 seconds
 for i = 1:cycle_number
-    usrpRadio.tx_usrp(start_time,tx_buff);
-    start_time = start_time + 3;
+    usrpRadio.tx_usrp(start_time,sineChan,numChans);
+    start_time = start_time + 10;
 end
 
 usrpRadio.terminate_usrp();

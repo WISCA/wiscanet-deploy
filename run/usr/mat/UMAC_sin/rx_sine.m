@@ -15,7 +15,7 @@ tx_gain = 80;               %tx_gain
 bw      = 20e6;             %bw
 setup_time = 0.1;           %setup_time
 num_samps = 50000;
-sample_rate = 20e6;
+sample_rate = 10e6;
 
 usrpRadio = local_usrp;
 
@@ -24,17 +24,17 @@ usrpRadio = usrpRadio.set_usrp(type, ant, subdev, ref, wirefmt, num_samps,...
 
 cycle_number = 5;
 start_time = sys_start_time;
+numChans = 2;
 
 % Receive a carrier every 3 seconds
 rxdat = [];
 for i = 1:cycle_number
-    rx_buff = usrpRadio.rx_usrp(start_time);
-    rxdat = [rxdat rx_buff];
-    start_time = start_time + 3;
+    rx_buff = usrpRadio.rx_usrp(start_time,numChans);
+    rxdat = [rxdat; rx_buff];
+    start_time = start_time + 10;
 end
-cRxDat = complex(rxdat(1:2:end), rxdat(2:2:end));
-fprintf('-- Dump log: cRxDat\n');
-save('cRxDat.mat');
+fprintf('-- Dump log: RxDat\n');
+save('RxDat.mat');
 
 usrpRadio.terminate_usrp();
 
