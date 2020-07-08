@@ -7,9 +7,10 @@ addpath(genpath('../'));
 %% Experiment Options and Parameters
 nCycles        = 10;
 procTime = 6; % Allow 6 seconds for processing to occur each loop
-commsParams.sampFreq     = 20e6;
+commsParams.sampFreq     = 10e6;
 commsParams.usrpSamples = 50000;
 sampFreq       = commsParams.sampFreq;
+numChans = 1; % Number of USRP Channels to use
 
 % Communications Waveform Parameters
 commsParams.nTrnSyms     = 128;
@@ -78,8 +79,6 @@ txFlag         = false;
 % Allocate data buffers
 buffSize       = commsParams.usrpSamples;
 buffEnd        = 2*buffSize;
-txBuff  = zeros(buffEnd, 1);
-rxBuff  = zeros(buffEnd, 1);
 rxWav = zeros(buffSize, 1);
 
 %   Transmitter Initialization
@@ -119,7 +118,7 @@ count = 1;
 
 % This is here for compatibility with the X310, set to 0 for B210 if you
 % want
-rampOffset = 2*12500; % 2 times the number of padding samples
+rampOffset = 12500; % number of padding samples
 
 % Modulate the training symbols
 trnSyms = step(modulator,trn_data);
@@ -180,21 +179,17 @@ for nn = 1:nCycles
         fileName = ['usrpQPSKNode_txWav_node',lIdStr, '_cycle_',num2str(nn),'.mat'];
         save(fullfile('./', fileName));
 
-        % Put transmit waveform into USRP format
-        len = numel(commsWav);
-        txBuff(1+rampOffset:2:2*len+rampOffset) = (real(commsWav));
-        txBuff(2+rampOffset:2:2*len+rampOffset) = (imag(commsWav));
-
+        outWav = zeros(commsParams.usrpSamples,1);
+        outWav(1+rampOffset:numel(commsWav)+rampOffset) = commsWav;
+        
         %% Apply (Interesting?) Channel before going OTA
-        outWav = complex(txBuff(1:2:end),txBuff(2:2:end));
-        chtaps = [1 0.5*exp(1i*pi/6) 0.1*exp(-1i*pi/8)];
+        %chtaps = [1 0.5*exp(1i*pi/6) 0.1*exp(-1i*pi/8)];
         %chtaps = [0.1,-0.3i,1,0.3i,0.2-0.7i,0.1i];
-        outWav = filter(chtaps,1,outWav);
-        txBuff(1:2:end) = real(outWav);
-        txBuff(2:2:end) = imag(outWav);
+        %txBuff = filter(chtaps,1,outWav);
+        txBuff = outWav;
 
         %% Transmit waveform packets through USRP
-        usrpRadio.tx_usrp(startTime, txBuff);
+        usrpRadio.tx_usrp(startTime, txBuff, numChans);
 
         % Mark that we have transmitted
         txFlag = false;
@@ -206,10 +201,7 @@ for nn = 1:nCycles
         fprintf('Receiving...\n\n')
 
         % Receive
-        rxBuff = (usrpRadio.rx_usrp(startTime)).';
-
-        % Convert to complex format
-        rxWav = complex(rxBuff(1:2:end),rxBuff(2:2:end));
+        rxWav = usrpRadio.rx_usrp(startTime,numChans);
 
         estSNR = snr(abs(rxWav(1+(rampOffset/2):14000+(rampOffset/2))),abs(rxWav(14001+(rampOffset/2):14001+13999+(rampOffset/2))));
         fprintf('Approx SNR: %f dB\n',estSNR);
