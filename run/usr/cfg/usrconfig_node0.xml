@@ -1,20 +1,20 @@
 <? xml version="1.0" ?>
 <UsrConfig>
     <LogicId> 1 </LogicId>
-    <OpMode> TX/RX </OpMode>
+    <OpMode> TX </OpMode>
     <MacMode> UMAC </MacMode>
     <Tslot> 1 </Tslot>
-    <matDir> UMAC_sdrn/usrpFunc </matDir>
-    <BbMatlab> usrpQPSKNode </BbMatlab>
+    <matDir> UMAC_sin </matDir>
+    <BbMatlab> tx_sine </BbMatlab>
     <LogMatlab> NULL </LogMatlab>
     <nsamps> 50000  </nsamps>
-    <rate> 20e6 </rate>
-    <subdev> A:B </subdev>
+    <rate> 10e6 </rate>
+    <subdev> "A:0 B:0" </subdev>
     <freq> 0.907E9 </freq>
-    <txgain> 40 </txgain>
-    <rxgain> 50 </rxgain>
+    <txgain> 20 </txgain>
+    <rxgain> 20 </rxgain>
     <bw> 100E6 </bw>
     <devaddr> replace_me </devaddr>
     <channels> "0,1" </channels>
-    <antennas> "TX/RX" </channels>
+    <antennas> "TX/RX" </antennas>
 </UsrConfig>
