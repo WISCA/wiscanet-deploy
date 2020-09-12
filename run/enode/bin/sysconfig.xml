@@ -1,5 +1,0 @@
-<? xml version="1.0" ?>
-<SysConfig>
-    <ServerIPAddr> cnode_ip </ServerIPAddr>
-    <ServerPort> 9000 </ServerPort>
-</SysConfig>

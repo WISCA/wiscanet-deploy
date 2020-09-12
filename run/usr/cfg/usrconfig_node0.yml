@@ -1,0 +1,18 @@
+---
+logic_id: 1
+op_mode: TX/RX
+mac_mode: UMAC
+time_slot: 1
+matlab_dir: UMAC_sin
+matlab_func: tx_sine
+matlab_log: NULL
+num_samples: 50000
+sample_rate: 10e6
+subdevice: "A:0 B:0"
+freq: 0.907E9
+tx_gain: 20
+rx_gain: 20
+bandwidth: 100E6
+device_addr: replace_me
+channels: "0,1"
+antennas: "TX/RX"
