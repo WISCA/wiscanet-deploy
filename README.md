@@ -1,3 +1,3 @@
 # WISCANet Deploy
 
-This is the `wdemo` directory that must be placed in the home folder
+This is the `wdemo` directory skeleton that must be placed in the home folder
